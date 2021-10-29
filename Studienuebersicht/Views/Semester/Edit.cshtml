@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "Layout";
+    ViewData["Title"] = "Add/Edit Module";
+}
+@using Studienuebersicht
+@model ModuleViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="ct">
+    <form [formGroup]="form" method="POST" asp-controller="Semester" asp-action="Save" id="module_form">
+        <div asp-validation-summary="ModelOnly"></div>
+
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label asp-for="Name">Modulname:</label>
+            <input type="text" class="form-control" asp-for="Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Professor">Professor:</label>
+            <input type="text" class="form-control" asp-for="Professor" />
+            <span asp-validation-for="Professor" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Ects">ECTS:</label>
+            <input type="number" class="form-control" asp-for="Ects" />
+            <span asp-validation-for="Ects" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Grade">Grade:</label>
+            <input type="text" class="form-control" asp-for="Grade" />
+            <span asp-validation-for="Grade" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Semester">Semester:</label>
+            <input type="number" class="form-control" asp-for="Semester" />
+            <span asp-validation-for="Semester" class="text-danger"></span>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Save" />
+    </form>
+</div>

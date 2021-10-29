@@ -7,6 +7,7 @@ namespace Studienuebersicht.Model
     {
         List<Module> GetAll();
         Module ById(Guid id);
+        public List<Module> GetSemester(List<Module> modules, int semester);
         int calcAllECTS(List<Module> modules);
         double calcAverageGrade(List<Module> modules);
         void Save(Module module);

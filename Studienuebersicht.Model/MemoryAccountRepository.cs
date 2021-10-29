@@ -17,9 +17,9 @@ namespace Studienuebersicht.Model
 
         public void Save(Account account)
         {
-            if (account.Id == null)
+            if (account.Id == Guid.Empty)
             {
-                account.Id = new Guid();
+                account.Id = Guid.NewGuid();
                 accounts.Add(account);
             }
         }

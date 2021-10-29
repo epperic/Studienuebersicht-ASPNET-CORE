@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Studienuebersicht.Model;
 
 namespace Studienuebersicht
 {
@@ -32,7 +33,7 @@ namespace Studienuebersicht
 
             services.AddSession();
             services.AddControllersWithViews();
-            //services.AddSingleton<IRepository, EfRepository>();
+            services.AddSingleton<IRepository, MemoryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +52,10 @@ namespace Studienuebersicht
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(name: "semester",
+                pattern: "Semester/{id}",
+                defaults: new { controller = "Semester", action = "Index" });
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}"

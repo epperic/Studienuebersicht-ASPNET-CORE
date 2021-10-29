@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Studienuebersicht.Model
 {
@@ -24,6 +25,20 @@ namespace Studienuebersicht.Model
                 return null;
         }
 
+        //Extracts only the modules with given semester and puts them in a list
+        public List<Module> GetSemester(List<Module> modules, int semester)
+        {
+            var filteredObjects = new List<Module>();
+            modules.ForEach(delegate(Module module) {
+                if (module.Semester == semester)
+                {
+                    filteredObjects.Add(module);
+                }
+            });
+            return filteredObjects.OrderBy(x => x.Name).ToList();
+        }
+
+        //calculates the sum of all ECTS, where a grade has been registered
         public int calcAllECTS(List<Module> modules)
         {
             int collectedECTS = 0;
@@ -37,6 +52,7 @@ namespace Studienuebersicht.Model
             return collectedECTS;
         }
 
+        //calculates the average grade of the given list of modules
         public double calcAverageGrade(List<Module> modules)
         {
             double sum = 0;
@@ -66,9 +82,9 @@ namespace Studienuebersicht.Model
 
         public void Save(Module module)
         {
-            if (module.Id == null)
+            if (module.Id == Guid.Empty)
             {
-                module.Id = new Guid();
+                module.Id = Guid.NewGuid();
                 modules.Add(module);
             }
             else
