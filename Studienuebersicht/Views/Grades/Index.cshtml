@@ -1,29 +1,38 @@
 ﻿@{
     Layout = "Layout";
+    ViewData["Title"] = "Grades Overview";
 }
+@using Studienuebersicht.MVC.ViewModel;
+@model ModuleTableViewModel
+
 <div class="ct">
+    <br />
     <table class="table table-hover" style="width: 100%">
         <colgroup>
             <col span="1" style="width: 10%;">
-            <col span="1" style="width: 70%;">
+            <col span="1" style="width: 65%;">
             <col span="1" style="width: 10%;">
-            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 15%;">
         </colgroup>
 
         <thead>
-        <td scope="col">Semester</td>
-        <td scope="col">Modul</td>
-        <td scope="col">ECTS: {{allECTS}}</td>
-        <td scope="col">Note: Ø{{averageGrade.toFixed(2)}}</td>
+            <tr>
+                <th scope="col">Semester</th>
+                <th scope="col">Modulname</th>
+                <th scope="col">ECTS: @Model.AllECTS</th>
+                <th scope="col">Grade Ø @Model.AverageGrade.ToString("N2")</th>
+            </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let modul of objects; let i = index" (click)="onSelect(i)"
-                [ngClass]="modul == selected ? 'table-info' : ''">
-                <td scope="row">{{modul.semester}}</td>
-                <td scope="row">{{modul.name}}</td>
-                <td scope="row">{{modul.ects}}</td>
-                <td scope="row">{{modul.note.toFixed(1)}}</td>
-            </tr>
+            @for (int i = 0; i < @Model.Modules.Count; i++)
+            {
+                <tr>
+                    <td>@Model.Modules[i].Semester</td>
+                    <td>@Model.Modules[i].Name</td>
+                    <td align="center">@Model.Modules[i].Ects</td>
+                    <td align="center">@Model.Modules[i].Grade</td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

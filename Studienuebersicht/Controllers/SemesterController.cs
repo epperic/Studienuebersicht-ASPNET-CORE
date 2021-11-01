@@ -1,23 +1,23 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Studienuebersicht.Model;
+using Studienuebersicht.MVC.ViewModel;
 using System;
-using System.Collections.Generic;
 
-namespace Studienuebersicht.Controllers
+namespace Studienuebersicht.MVC.Controllers
 {
     public class SemesterController : Controller
     {
         private ILogger<SemesterController> logger;
         private IRepository repository;
-        private SemesterViewModel semester;
+        private ModuleTableViewModel semesterTable;
 
         //prepares the ViewModel 
         private void initializeSemester(int id)
         {
             var allModules = repository.Modules.GetAll();
             var semester = repository.Modules.GetSemester(allModules, id);
-            this.semester = new SemesterViewModel
+            this.semesterTable = new ModuleTableViewModel
             {
                 Modules = semester,
                 AllECTS = repository.Modules.calcAllECTS(semester),
@@ -34,8 +34,15 @@ namespace Studienuebersicht.Controllers
         public IActionResult Index(int id)
         {
             logger.LogInformation("Index method called");
-            initializeSemester(id);
-            return View(semester);
+            if (id != 0)
+            {
+                initializeSemester(id);
+                return View(semesterTable);
+            }
+            else
+            {
+                return Redirect($"~/Semester/1");
+            }
         }
 
         public IActionResult Add()

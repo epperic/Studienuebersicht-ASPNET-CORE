@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Studienuebersicht.Controllers
+namespace Studienuebersicht.MVC.Controllers
 {
     public class HomeController : Controller
     {

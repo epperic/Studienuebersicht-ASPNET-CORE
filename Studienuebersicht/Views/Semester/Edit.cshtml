@@ -2,11 +2,12 @@
     Layout = "Layout";
     ViewData["Title"] = "Add/Edit Module";
 }
-@using Studienuebersicht
+@using Studienuebersicht.MVC.ViewModel
 @model ModuleViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div class="ct">
+    <br />
     <form [formGroup]="form" method="POST" asp-controller="Semester" asp-action="Save" id="module_form">
         <div asp-validation-summary="ModelOnly"></div>
 

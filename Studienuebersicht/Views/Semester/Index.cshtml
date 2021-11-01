@@ -1,18 +1,14 @@
 ﻿@{
     Layout = "Layout";
+    ViewData["Title"] = "Semester Overview";
 }
-@using Studienuebersicht;
-@model SemesterViewModel
+@using Studienuebersicht.MVC.ViewModel;
+@model ModuleTableViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div class="ct">
-    <br><br>
 
-    <form method="GET" action="/Semester/Add">
-        <button type="submit" class="btn btn-success">Add new Module</button>
-    </form>
-
-    <br><br>
+    <br>
 
     <table class="table table-bordered table-hover">
         <colgroup>
@@ -33,18 +29,23 @@
         </thead>
         <tbody>
             @for (int i = 0; i < @Model.Modules.Count; i++)
-        {
-            <tr>
-                <td>@Model.Modules[i].Name</td>
-                <td>@Model.Modules[i].Professor</td>
-                <td>@Model.Modules[i].Ects</td>
-                <td>@Model.Modules[i].Grade</td>
-                <td>
-                    <a asp-controller="Semester" asp-action="Edit" asp-route-id="@Model.Modules[i].Id">Edit</a>
-                    <a asp-controller="Semester" asp-action="Delete" asp-route-id="@Model.Modules[i].Id">Delete</a>
-                </td>
-            </tr>
-        }
+            {
+                <tr>
+                    <td>@Model.Modules[i].Name</td>
+                    <td>@Model.Modules[i].Professor</td>
+                    <td>@Model.Modules[i].Ects</td>
+                    <td>@Model.Modules[i].Grade</td>
+                    <td>
+                        <a asp-controller="Semester" asp-action="Edit" asp-route-id="@Model.Modules[i].Id">Edit</a>
+                        <a asp-controller="Semester" asp-action="Delete" asp-route-id="@Model.Modules[i].Id">Delete</a>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
+
+    <br>
+    <form method="GET" action="/Semester/Add">
+        <button type="submit" class="btn btn-success">Add new Module</button>
+    </form>
 </div>

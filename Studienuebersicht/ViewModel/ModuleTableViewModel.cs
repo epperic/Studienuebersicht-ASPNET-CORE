@@ -1,9 +1,9 @@
 ﻿using Studienuebersicht.Model;
 using System.Collections.Generic;
 
-namespace Studienuebersicht
+namespace Studienuebersicht.MVC.ViewModel
 {
-    public class SemesterViewModel
+    public class ModuleTableViewModel
     {
         public List<Module> Modules { get; set; }
         public int AllECTS { get; set; }

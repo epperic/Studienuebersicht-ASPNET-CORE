@@ -1,9 +1,8 @@
-using System.Collections.Generic;
+using Studienuebersicht.Model;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using Studienuebersicht.Model;
 
-namespace Studienuebersicht
+namespace Studienuebersicht.MVC.ViewModel
 {
     public class ModuleViewModel : Entity
     {
@@ -15,7 +14,7 @@ namespace Studienuebersicht
         [StringLength(40, MinimumLength = 3, ErrorMessage = "Value for {0} must be between {1} and {2} characters.")]
         public string Professor { get; set; }
 
-        [Display(Name ="ECTS")]
+        [Display(Name = "ECTS")]
         [Required]
         [Range(2, 30,
         ErrorMessage = "Value for {0} must be between {1} and {2}.")]
@@ -32,7 +31,7 @@ namespace Studienuebersicht
 
         public static Module Convert(ModuleViewModel viewModel)
         {
-            return new Module() 
+            return new Module()
             {
                 Id = viewModel.Id,
                 Name = viewModel.Name,
@@ -52,7 +51,7 @@ namespace Studienuebersicht
                 Professor = module.Professor,
                 Ects = module.Ects,
                 Grade = module.Grade.ToString(CultureInfo.InvariantCulture),
-                Semester= module.Semester
+                Semester = module.Semester
             };
         }
     }

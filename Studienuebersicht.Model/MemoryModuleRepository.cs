@@ -29,7 +29,8 @@ namespace Studienuebersicht.Model
         public List<Module> GetSemester(List<Module> modules, int semester)
         {
             var filteredObjects = new List<Module>();
-            modules.ForEach(delegate(Module module) {
+            modules.ForEach(delegate (Module module)
+            {
                 if (module.Semester == semester)
                 {
                     filteredObjects.Add(module);
@@ -37,6 +38,35 @@ namespace Studienuebersicht.Model
             });
             return filteredObjects.OrderBy(x => x.Name).ToList();
         }
+
+        //Gets only the Modules where a valid Grade != 0.0 has been submitted
+        public List<Module> GetGrades(List<Module> modules)
+        {
+            var filteredObjects = new List<Module>();
+            modules.ForEach(delegate (Module module)
+            {
+                if (module.Grade != 0.0)
+                {
+                    filteredObjects.Add(module);
+                }
+            });
+            return filteredObjects.OrderBy(x => x.Semester).ToList();
+        }
+
+        //Gets only the Modules where the Grade has not been put in yet (Grade == 0.0) & Semester is < activeSemester 
+        public List<Module> GetToDo(List<Module> modules, int activeSemester)
+        {
+            var filteredObjects = new List<Module>();
+            modules.ForEach(delegate (Module module)
+            {
+                if (module.Grade == 0 && module.Semester < activeSemester)
+                {
+                    filteredObjects.Add(module);
+                }
+            });
+            return filteredObjects.OrderBy(x => x.Semester).ToList();
+        }
+
 
         //calculates the sum of all ECTS, where a grade has been registered
         public int calcAllECTS(List<Module> modules)
