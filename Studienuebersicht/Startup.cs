@@ -1,3 +1,4 @@
+using Culture;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,7 +49,7 @@ namespace Studienuebersicht
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
-            //app.UseCustomAuthorization();
+            app.UseCustomAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

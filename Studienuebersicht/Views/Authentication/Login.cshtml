@@ -2,3 +2,36 @@
     Layout = "Layout";
     ViewData["Title"] = "Login";
 }
+@using Studienuebersicht.MVC.ViewModel;
+@model Login
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<script type="text/javascript">
+    function keypressHandler(e) {
+        if (e.which == 13) {
+            e.preventDefault(); //stops default action: submitting form
+            $(this).blur();
+            $('#submit_button').focus().click();
+        }
+    }
+    $('#submit_button').keypress(keypressHandler);
+</script>
+
+<br />
+<form method="POST" asp-controller="Authentication" asp-action="CheckCredentials">
+    <div class="form-group">
+        <label asp-for="Email">Email:</label>
+        <input class="form-control" asp-for="Email" placeholder="Enter Email" aria-describedby="emailHelp" #email />
+        <small id="emailHelp" class="form-text text-muted">Yes, I'm stealing your password.</small>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password">Password:</label>
+        <input class="form-control" type="password" asp-for="Password" placeholder="Enter Password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <input class="btn btn-primary" type="submit" value="Login" id="submit_button" />
+    <br />
+    <div asp-validation-summary="ModelOnly"></div>
+</form>

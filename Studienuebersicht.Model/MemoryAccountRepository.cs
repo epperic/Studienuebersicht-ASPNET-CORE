@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Studienuebersicht.Model
@@ -15,12 +14,35 @@ namespace Studienuebersicht.Model
                     select acc).SingleOrDefault();
         }
 
+        public Account ById(int id)
+        {
+            var pos = PosOf(id);
+            if (pos != -1)
+                return accounts[pos];
+            else
+                return null;
+        }
+        private int PosOf(int id)
+        {
+            for (int i = 0; i < accounts.Count; i++)
+            {
+                if (accounts[i].Id == id)
+                    return i;
+            }
+
+            return -1;
+        }
         public void Save(Account account)
         {
-            if (account.Id == Guid.Empty)
+            if (account.Id == 0)
             {
-                account.Id = Guid.NewGuid();
+                account.Id = accounts.Count + 1;
                 accounts.Add(account);
+            }
+            else
+            {
+                var pos = PosOf(account.Id);
+                accounts[pos] = account;
             }
         }
     }

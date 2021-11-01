@@ -6,6 +6,7 @@ namespace Studienuebersicht.MVC
 {
     public static class MvcExtensions
     {
+        //Helperclass to add the active tag to navbar items
         public static string ActiveClass(this IHtmlHelper htmlHelper, string controllers = null, string actions = null, string cssClass = "active")
         {
             var currentController = htmlHelper?.ViewContext.RouteData.Values["controller"] as string;
