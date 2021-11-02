@@ -7,10 +7,10 @@ namespace Studienuebersicht.Model
     {
         private List<Account> accounts = new List<Account>();
 
-        public Account FindAdminByEmailAndPassword(string email, string password)
+        public Account FindAccount(string email)
         {
             return (from acc in accounts
-                    where acc.IsAdmin && acc.EMail.Equals(email) && acc.Password.Equals(password)
+                    where acc.EMail.Equals(email)
                     select acc).SingleOrDefault();
         }
 

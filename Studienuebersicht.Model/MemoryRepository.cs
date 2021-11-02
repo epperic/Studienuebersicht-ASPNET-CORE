@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BCrypt.Net;
+using System;
 
 namespace Studienuebersicht.Model
 {
@@ -21,14 +22,14 @@ namespace Studienuebersicht.Model
             {
                 IsAdmin = true,
                 EMail = "Eric.epp@stud.hshl.de",
-                Password = "test"
+                Password = BCrypt.Net.BCrypt.HashPassword("test")
             };
 
             var a2 = new Account()
             {
                 IsAdmin = false,
                 EMail = "test@test.de",
-                Password = "test"
+                Password = BCrypt.Net.BCrypt.HashPassword("test")
             };
 
             account_repository.Save(a1);

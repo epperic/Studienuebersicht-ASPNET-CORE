@@ -2,7 +2,7 @@
 {
     public interface IAccountRepository
     {
-        Account FindAdminByEmailAndPassword(string email, string password);
+        Account FindAccount(string email);
         Account ById(int id);
         void Save(Account account);
     }
