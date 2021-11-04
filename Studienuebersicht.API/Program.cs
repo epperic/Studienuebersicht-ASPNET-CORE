@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Studienuebersicht.MVC
+namespace Studienuebersicht.API
 {
     public class Program
     {

@@ -7,11 +7,16 @@ namespace Studienuebersicht.Model
     {
         private List<Account> accounts = new List<Account>();
 
-        public Account FindAccount(string email)
+        public Account FindAccount(string email, string password)
         {
-            return (from acc in accounts
-                    where acc.EMail.Equals(email)
-                    select acc).SingleOrDefault();
+            var account = (from acc in accounts
+                           where acc.EMail.Equals(email)
+                           select acc).SingleOrDefault();
+
+            if (account != null && BCrypt.Net.BCrypt.Verify(password, account.Password))
+                return account;
+            else
+                return null;
         }
 
         public Account ById(int id)

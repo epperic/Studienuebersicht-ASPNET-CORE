@@ -21,9 +21,9 @@ namespace Studienuebersicht.MVC.Controllers
 
         public IActionResult CheckCredentials([FromForm] Login login)
         {
-            var account = repository.Accounts.FindAccount(login.Email);
+            var account = repository.Accounts.FindAccount(login.Email, login.Password);
 
-            if (account == null || !BCrypt.Net.BCrypt.Verify(login.Password, account.Password))
+            if (account == null)
             {
                 ModelState.AddModelError("", "A user with these credentials could not be found!");
                 return View("Login", login);

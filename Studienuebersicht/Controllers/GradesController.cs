@@ -14,9 +14,8 @@ namespace Studienuebersicht.MVC.Controllers
         //prepares the viewModel
         private void initializeTableViewModel()
         {
-            var allModules = repository.Modules.GetAll();
-            var grades = repository.Modules.GetGrades(allModules);
-            this.gradesTable = new ModuleTableViewModel
+            var grades = repository.Modules.GetGrades();
+            gradesTable = new ModuleTableViewModel
             {
                 Modules = grades,
                 AllECTS = repository.Modules.calcAllECTS(grades),

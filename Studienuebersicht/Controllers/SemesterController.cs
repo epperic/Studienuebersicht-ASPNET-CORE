@@ -15,9 +15,8 @@ namespace Studienuebersicht.MVC.Controllers
         //prepares the ViewModel 
         private void initializeSemester(int id)
         {
-            var allModules = repository.Modules.GetAll();
-            var semester = repository.Modules.GetSemester(allModules, id);
-            this.semesterTable = new ModuleTableViewModel
+            var semester = repository.Modules.GetSemester(id);
+            semesterTable = new ModuleTableViewModel
             {
                 Modules = semester,
                 AllECTS = repository.Modules.calcAllECTS(semester),

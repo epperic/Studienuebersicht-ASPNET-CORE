@@ -1,5 +1,4 @@
-﻿using BCrypt.Net;
-using System;
+﻿using System;
 
 namespace Studienuebersicht.Model
 {

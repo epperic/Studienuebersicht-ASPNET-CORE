@@ -7,6 +7,12 @@ namespace Studienuebersicht.Model
     public class MemoryModuleRepository : IModuleRepository
     {
         private List<Module> modules = new List<Module>();
+
+        public List<Module> GetAll()
+        {
+            return modules;
+        }
+
         private int PosOf(Guid Id)
         {
             for (int i = 0; i < modules.Count; i++)
@@ -26,7 +32,7 @@ namespace Studienuebersicht.Model
         }
 
         //Extracts only the modules with given semester and puts them in a list
-        public List<Module> GetSemester(List<Module> modules, int semester)
+        public List<Module> GetSemester(int semester)
         {
             var filteredObjects = new List<Module>();
             modules.ForEach(delegate (Module module)
@@ -40,7 +46,7 @@ namespace Studienuebersicht.Model
         }
 
         //Gets only the Modules where a valid Grade != 0.0 has been submitted
-        public List<Module> GetGrades(List<Module> modules)
+        public List<Module> GetGrades()
         {
             var filteredObjects = new List<Module>();
             modules.ForEach(delegate (Module module)
@@ -53,13 +59,13 @@ namespace Studienuebersicht.Model
             return filteredObjects.OrderBy(x => x.Semester).ToList();
         }
 
-        //Gets only the Modules where the Grade has not been put in yet (Grade == 0.0) & Semester is < activeSemester 
-        public List<Module> GetToDo(List<Module> modules, int activeSemester)
+        //Gets only the Modules where the Grade has not been put in yet (Grade == 0.0) & Semester is < currentSemester 
+        public List<Module> GetToDo(int currentSemester)
         {
             var filteredObjects = new List<Module>();
             modules.ForEach(delegate (Module module)
             {
-                if (module.Grade == 0 && module.Semester < activeSemester)
+                if (module.Grade == 0 && module.Semester < currentSemester)
                 {
                     filteredObjects.Add(module);
                 }
@@ -103,11 +109,6 @@ namespace Studienuebersicht.Model
             var pos = PosOf(id);
             if (pos != -1)
                 modules.RemoveAt(pos);
-        }
-
-        public List<Module> GetAll()
-        {
-            return modules;
         }
 
         public void Save(Module module)

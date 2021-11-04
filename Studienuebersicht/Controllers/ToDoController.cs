@@ -13,15 +13,14 @@ namespace Studienuebersicht.MVC.Controllers
         private ToDoViewModel viewModel;
 
         //prepares the viewModel
-        private void initializeViewModel(int activeSemester)
+        private void initializeViewModel(int currentSemester)
         {
-            var allModules = repository.Modules.GetAll();
-            var toDo = repository.Modules.GetToDo(allModules, activeSemester);
+            var toDo = repository.Modules.GetToDo(currentSemester);
             viewModel = new ToDoViewModel
             {
                 Modules = toDo,
                 HasSubmitted = true,
-                CurrentSemester = activeSemester
+                CurrentSemester = currentSemester
             };
         }
         public ToDoController(ILogger<ToDoController> logger, IRepository repository)

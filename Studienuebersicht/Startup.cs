@@ -1,11 +1,14 @@
 using Culture;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StackExchange.Redis;
+using Studienuebersicht.EFCore;
 using Studienuebersicht.Model;
 
-namespace Studienuebersicht
+namespace Studienuebersicht.MVC
 {
     public class Startup
     {
@@ -13,7 +16,7 @@ namespace Studienuebersicht
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            /*var redis_connection_string = Helper.GetFromEnvironmentOrDefault("REDIS_CONNECTION_STRING", "");
+            var redis_connection_string = Helper.GetFromEnvironmentOrDefault("REDIS_CONNECTION_STRING", "");
             if (redis_connection_string == string.Empty)
             {
                 services.AddDistributedMemoryCache();
@@ -30,11 +33,18 @@ namespace Studienuebersicht
                     o.Configuration = redis_connection_string;
                     o.InstanceName = "Studienuebersicht";
                 });
-            }*/
+            }
 
             services.AddSession();
             services.AddControllersWithViews();
-            services.AddSingleton<IRepository, MemoryRepository>();
+
+            var persistence_method = Helper.GetFromEnvironmentOrDefault("PERSISTENCE_METHOD", "memory");
+
+            if (persistence_method.Equals("memory"))
+                services.AddSingleton<IRepository, MemoryRepository>();
+
+            if (persistence_method.Equals("efcore"))
+                services.AddSingleton<IRepository, EFCoreRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
