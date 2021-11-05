@@ -22,5 +22,16 @@ services:
       - POSTGRESQL_DATABASE=postgres
       - POSTGRESQL_PASSWORD=testtest
 
+  api:
+    image: epperic/studienuebersichtapi
+    ports:
+      - 8081:80
+    environment:
+      - PERSISTENCE_METHOD=efcore
+      - POSTGRESQL_HOST=postgres
+      - POSTGRESQL_USER=postgres
+      - POSTGRESQL_DATABASE=postgres
+      - POSTGRESQL_PASSWORD=testtest
+
 volumes:
   postgres-data:
