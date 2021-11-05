@@ -14,7 +14,7 @@ namespace Studienuebersicht.EFCore
             connection_string = string.Format("Host={0};Username={1};Password={2};Database={3}",
                 Helper.GetFromEnvironmentOrDefault("POSTGRESQL_HOST", "localhost"),
                 Helper.GetFromEnvironmentOrDefault("POSTGRESQL_USER", "postgres"),
-                Helper.GetFromEnvironmentOrDefault("POSTGRESQL_PASSWORD", "secret"),
+                Helper.GetFromEnvironmentOrDefault("POSTGRESQL_PASSWORD", "testtest"),
                 Helper.GetFromEnvironmentOrDefault("POSTGRESQL_DATABASE", "postgres"));
         }
 

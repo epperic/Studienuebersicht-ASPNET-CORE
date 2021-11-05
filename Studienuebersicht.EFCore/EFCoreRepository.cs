@@ -18,7 +18,7 @@ namespace Studienuebersicht.EFCore
             module_repository = new EFCoreModuleRepository(context);
             account_repository = new EFCoreAccountRepository(context);
 
-            if (context.Accounts.Any())
+            if (!context.Accounts.Any())
             {
                 account_repository.Save(new Account()
                 {

@@ -48,25 +48,25 @@ namespace Studienuebersicht.EFCore
 
         public Module ById(Guid id)
         {
-            return context.Modules.Where(x => x.Id == id).FirstOrDefault();
+            return context.Modules.Where(x => x.Id == id).AsNoTracking().FirstOrDefault();
         }
 
         //Extracts only the modules with given semester and puts them in a list
         public List<Module> GetSemester(int semester)
         {
-            return context.Modules.Where(x => x.Semester == semester).ToList();
+            return context.Modules.Where(x => x.Semester == semester).AsNoTracking().ToList();
         }
 
         //Gets only the Modules where a valid Grade != 0.0 has been submitted
         public List<Module> GetGrades()
         {
-            return context.Modules.Where(x => x.Grade != 0.0).ToList();
+            return context.Modules.Where(x => x.Grade != 0.0).AsNoTracking().ToList();
         }
 
         //Gets only the Modules where the Grade has not been put in yet (Grade == 0.0) & Semester is < currentSemester 
         public List<Module> GetToDo(int currentSemester)
         {
-            return context.Modules.Where(x => x.Grade == 0 && x.Semester < currentSemester).ToList();
+            return context.Modules.Where(x => x.Grade == 0 && x.Semester < currentSemester).AsNoTracking().ToList();
         }
 
         //calculates the sum of all ECTS, where a grade has been registered

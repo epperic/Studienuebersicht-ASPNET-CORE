@@ -1,5 +1,5 @@
 #!/bin/sh
 
-docker build . -f Docker/mvc/Dockerfile -t stuckenholz/seminarmanagermvc:latest
+docker build . -f Docker/mvc/Dockerfile -t epperic/studienuebersicht:latest
 docker login
-docker push stuckenholz/seminarmanagermvc:latest
+docker push epperic/studienuebersicht:latest
